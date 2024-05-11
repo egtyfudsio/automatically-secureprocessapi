@@ -1,6 +1,14 @@
-function add(x, y) {
-  return x + y;
+function wordBreak(s, wordDict) {
+  const set = new Set(wordDict);
+  const dp = new Array(s.length + 1).fill(false);
+  dp[0] = true;
+  for (let end = 1; end <= s.length; end++) {
+    for (let start = 0; start < end; start++) {
+      if (dp[start] && set.has(s.substring(start, end))) {
+        dp[end] = true;
+        break;
+      }
+    }
+  }
+  return dp[s.length];
 }
-
-const result = add(5, 3);
-console.log(result); // 8
